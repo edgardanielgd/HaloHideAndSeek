@@ -9,6 +9,7 @@ function OnScriptLoad()
     register_callback(cb['EVENT_SPAWN'],"OnPlayerSpawn")
     register_callback(cb['EVENT_JOIN'],"OnPlayerJoin")
     register_callback(cb['EVENT_GAME_START'],"OnGameStart")
+    register_callback(cb['EVENT_KILL'],"OnKill")
     spawn_object("vehicle","vehicles\\ghost\\ghost");
 end
 function OnGameStart()
@@ -95,6 +96,16 @@ function UngodTeam()
 	for i=1,16 do 
 		if player_present(i) and get_var(i,"$team")=="blue" then
 			execute_command("ungod "..i)
+		end
+	end
+end
+function OnKill(KillerIndex,VictimIndex)
+	if get_var(KillerIndex,"$team")=="blue" and get_var(VictimIndex,"$team")=="red" then
+		execute_command("st "..VictimIndex.." blue")
+		say_all(get_var(VictimIndex,"$name").."was found! Now he will be a searcher!")
+		if tonumber(get_var(0,"$reds"))==0 then
+			say_all("Hunters win!!  Nice game")
+			execute_command("sv_map chillout team_slayer")
 		end
 	end
 end
