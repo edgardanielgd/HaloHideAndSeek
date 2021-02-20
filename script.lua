@@ -64,25 +64,13 @@ end
 function OnPlayerSpawn(PlayerIndex)
     execute_command("wdel "..PlayerIndex.." 5")
     if get_var(PlayerIndex,"$team")=="blue" then
-    	new_weap=spawn_object("weap","weapons\\pistol\\pistol")
-        new_weap2=spawn_object("weap","weapons\\sniper rifle\\sniper rifle")
-        new_weap3=spawn_object("weap","weapons\\shotgun\\shotgun")
+    	new_weap=spawn_object("weap","weapons\\ball\\ball")
         assign_weapon(new_weap,PlayerIndex)
-        assign_weapon(new_weap2,PlayerIndex)
-        assign_weapon(new_weap3,PlayerIndex)
 	if not seeking and flying then
-		say(PlayerIndex,"White while red team hides")
+		say(PlayerIndex,"Wait while red team hides")
 		execute_command("god "..PlayerIndex)
 		execute_command("m "..PlayerIndex.." 100 100 100")
 	end
-    else 
-	new_weap=spawn_object("weap","weapons\\plasma_cannon\\plasma_cannon")
-	new_weap2=spawn_object("weap","weapons\\needler\\mp_needler")
-	new_weap3=spawn_object("weap","weapons\\assault rifle\\assault rifle")
-        assign_weapon(new_weap,PlayerIndex)
-        assign_weapon(new_weap2,PlayerIndex)
-        assign_weapon(new_weap3,PlayerIndex)
-end
 end
 function OnEnterVehicle(PlayerIndex)
 	say_all(get_var(PlayerIndex,"$name").." enter a vehicle")
