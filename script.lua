@@ -14,7 +14,7 @@ function OnScriptLoad()
     spawn_object("vehicle","vehicles\\ghost\\ghost");
 end
 function DeleteObj(index)
-	print("Saca"..index)
+	print("Saca "..index)
 	destroy_object(index)
 end
 function OnGameStart()
@@ -84,6 +84,8 @@ function OnPlayerSpawn(PlayerIndex)
 		execute_command("god "..PlayerIndex)
 		execute_command("m "..PlayerIndex.." 100 100 100")
 	end
+    else
+	execute_command("s "..PlayerIndex.." 2")
     end
 end
 function OnEnterVehicle(PlayerIndex)
@@ -98,6 +100,8 @@ function UngodTeam()
 	for i=1,16 do 
 		if player_present(i) and get_var(i,"$team")=="blue" then
 			execute_command("ungod "..i)
+		elseif player_present(i) then
+			execute_command("s "..i.." 1")
 		end
 	end
 end
