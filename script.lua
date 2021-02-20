@@ -9,15 +9,27 @@ function OnScriptLoad()
     register_callback(cb['EVENT_SPAWN'],"OnPlayerSpawn")
     register_callback(cb['EVENT_JOIN'],"OnPlayerJoin")
     register_callback(cb['EVENT_GAME_START'],"OnGameStart")
+    register_callback(cb['EVENT_WEAPON_DROP'],"OnWeaponDrop")
     register_callback(cb['EVENT_KILL'],"OnKill")
     spawn_object("vehicle","vehicles\\ghost\\ghost");
 end
+function DeleteObj(index)
+	print("Saca"..index)
+	destroy_object(index)
+end
 function OnGameStart()
+   execute_command("disable_all_objects 0 1")
    counting=false
    seeking=false
    flying=false
    math.randomseed(os.time())
    say_all("Hello")
+end
+function OnWeaponDrop(PlayerIndex,Slot)
+	if get_var(PlayerIndex,"$team") then
+		new_weap=spawn_object("weap","weapons\\ball\\ball")
+	        assign_weapon(new_weap,PlayerIndex)
+	end
 end
 function pickRandom()
    id=math.random(1,tonumber(get_var(0,"$pn")))
@@ -72,6 +84,7 @@ function OnPlayerSpawn(PlayerIndex)
 		execute_command("god "..PlayerIndex)
 		execute_command("m "..PlayerIndex.." 100 100 100")
 	end
+    end
 end
 function OnEnterVehicle(PlayerIndex)
 	say_all(get_var(PlayerIndex,"$name").." enter a vehicle")
