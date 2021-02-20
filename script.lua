@@ -52,7 +52,7 @@ function Countdown(x)
 		return false
 	end
 end
-function OnPlayerJoin(PlayerIndex)
+function OnPlayerJoin(PlayerIndex)	
     say(PlayerIndex,"Welcome to hide and seek test server!")
     if tonumber(get_var(0,"$pn"))>1 and not counting then
        	   counting=true
@@ -62,6 +62,7 @@ function OnPlayerJoin(PlayerIndex)
     end
 end
 function OnPlayerSpawn(PlayerIndex)
+    execute_command("sh "..PlayerIndex.." 0")
     execute_command("wdel "..PlayerIndex.." 5")
     if get_var(PlayerIndex,"$team")=="blue" then
     	new_weap=spawn_object("weap","weapons\\ball\\ball")
