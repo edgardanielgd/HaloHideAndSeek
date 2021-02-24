@@ -26,7 +26,7 @@ function OnGameStart()
    say_all("Hello")
 end
 function OnWeaponDrop(PlayerIndex,Slot)
-	if get_var(PlayerIndex,"$team") then
+	if get_var(PlayerIndex,"$team")=="blue" then
 		new_weap=spawn_object("weap","weapons\\ball\\ball")
 	        assign_weapon(new_weap,PlayerIndex)
 	end
